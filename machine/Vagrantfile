@@ -1,0 +1,12 @@
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "debian/jessie64"
+  config.vm.provider :lxc do |lxc|
+    lxc.container_name = 'machine'
+    lxc.customize 'net.0.type', 'none'
+    lxc.customize 'hook.mount', File.dirname(__FILE__) + '/network_hook.sh'
+  end
+end
+
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'lxc'
