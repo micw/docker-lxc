@@ -1,4 +1,4 @@
-This is just a proof of concept. It shows that it is possible to run a statefull lxc within a (privileged) docker container.
+This is just a proof of concept. It shows that it is possible to run a stateful lxc within a (privileged) docker container.
 
 
 Todos:
