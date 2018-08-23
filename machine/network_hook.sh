@@ -8,6 +8,11 @@ fi
 # remove 'dir:' prefix from root path
 LXC_ROOTFS_PATH=${LXC_ROOTFS_PATH#'dir:'}
 
+if [ ! -f ${LXC_ROOTFS_PATH}/etc/network/interfaces ]; then
+  echo "No debian-like network config found - skipping"
+  exit 0
+fi
+
 set -e
 
 PATH="/bin:/usr/bin:$PATH"

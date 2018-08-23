@@ -1,8 +1,17 @@
-This is just a proof of concept. It shows that it is possible to run a stateful lxc within a (privileged) docker container.
+This docker container creates, provisions and runs a stateful lxc container using vagrant-lxc.
 
+Advantages:
+* Have statefull full-os containers on a docker environment
+* Use features unique to docker for your lxc containers (e.g. docker-compose, exposed ports, traefik for ingress, kubernetes as platform)
 
-Todos:
+Features:
+* Initialize the lxc-container with a preexisting image on first start
+* Run ansible provisioner if "playbook.yml" exist on the data directory
+* Runs lxc directly on the docker container's network, so no special bridge is required for lxc
 * shutdown signal handler that gracfully stops the lxc container on docker stop
+
+Todos/Ideas:
 * check if it's possible to run in an unprivileged container
-* customize the lxc container using env vars and vagrant provisioners
-* use and document volumes to persist the lxc container independent docker container
+* bind-mount docker's /etc/hosts to get service discovery
+* Inherit the container's hostname?
+

@@ -1,11 +1,17 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "debian/jessie64"
+  config.vm.box = "__BOX__"
+  config.vm.synced_folder ".", "/vagrant", disabled: true
   config.vm.provider :lxc do |lxc|
     lxc.container_name = 'machine'
     lxc.customize 'net.0.type', 'none'
     lxc.customize 'hook.mount', File.dirname(__FILE__) + '/network_hook.sh'
+  end
+  config.vm.provision "ansible" do |ansible|
+    ansible.become = true
+    ansible.compatibility_mode = "2.0"
+    ansible.playbook = "/data/playbook.yml"
   end
 end
 
