@@ -20,6 +20,10 @@ This project allows to use a single LXC container within a docker container to g
 * Creation of initial root filesystems: for some distributions, a root filesystem can simply be set, using an environment variable
 * Adding of initial SSH key via environment variable
 
+### Ideas / Backlog
+
+* Support more distribution root filesystems
+* Import rootfs from vagrant-lxc boxes
 
 ## How to run
 
