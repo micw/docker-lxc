@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# If called as PID 1 or as child of another PID, pass the command to bash.
+# Otherwise enter the lxc-container and pass the command into it
+
+if [ "$PPID" == "0" -a "$$" != "1" ]; then
+  exec lxc-attach -n machine $0 "$@"
+  exit $?
+fi
+
+exec /bin/bash "$@"

@@ -1,0 +1,31 @@
+### Some config from common.conf
+
+# Setup the LXC devices in /dev/lxc/
+lxc.tty.dir = lxc
+
+# Allow for 1024 pseudo terminals
+lxc.pty.max = 1024
+
+# Setup 4 tty devices
+lxc.tty.max = 4
+
+# Drop some harmful capabilities
+lxc.cap.drop = mac_admin mac_override sys_time sys_module sys_rawio
+
+# Setup the default mounts
+lxc.mount.auto = cgroup:mixed proc:mixed sys:mixed
+lxc.mount.entry = /sys/fs/fuse/connections sys/fs/fuse/connections none bind,optional 0 0
+
+### Custom config
+
+# Enable LXCFS if mounted
+lxc.include = /usr/share/lxc/config/common.conf.d/00-lxcfs.conf
+
+# enable nesting
+lxc.include = /usr/share/lxc/config/nesting.conf
+
+# Use host network
+lxc.net.0.type=none
+
+lxc.rootfs.path=/data/rootfs
+
