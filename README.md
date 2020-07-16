@@ -1,7 +1,6 @@
 # Running stateful linux containers in docker
 
-> [!WARNING]
-> This is a complete rewrite, using LXC only without vagrant. It is able to run LXC containers created with v0.1 but
+> :warning: This is a complete rewrite, using LXC only without vagrant. It is able to run LXC containers created with v0.1 but
 > config and usage differs. Use tag v0.1 to get the old version.
 
 ## Why?
