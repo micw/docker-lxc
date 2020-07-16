@@ -23,6 +23,7 @@ This project allows to use a single LXC container within a docker container to g
 
 ## How to run
 
+```
 docker run -d \
   --name lxc \
   --privileged  \
@@ -31,6 +32,7 @@ docker run -d \
   -e DISTRIBUTION=alpine \
   -e INITIAL_SSH_KEY="ssh-rsa AAAA...Q== my-initial-ssh-key" \
   micwy/lxc
+ ```
 
 * "privileged" is currently required to run LXC on the container
 * The hostname is passed into the lxc container
