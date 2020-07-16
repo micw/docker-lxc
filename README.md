@@ -54,9 +54,8 @@ Installs alpine if rootfs does not exist.
 Features:
 * Quite minimal image with bash, nano and openssh
 
+Supported environment variables:
 * ALPINE_ARCH: (default x86_64): architecture of the rootfs
 * ALPINE_VERSION: (default latest-stable): alpine version to install
 * ALPINE_EXTRA_PACKAGES: additional packages to install along with the rootfs
-
-
 
