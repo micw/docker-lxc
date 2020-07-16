@@ -1,7 +1,9 @@
-# Running stateful linux containers in docker
+# Running stateful linux containers in docker ![](https://img.shields.io/docker/pulls/micwy/lxc.svg?v_DATE)
 
 > :warning: This is a complete rewrite, using LXC only without vagrant. It is able to run LXC containers created with v0.1 but
 > config and usage differs. Use tag v0.1 to get the old version.
+
+Docker Hub: [micwy/lxc](https://hub.docker.com/r/micwy/lxc) 
 
 ## Why?
 
