@@ -19,10 +19,10 @@ This project allows to use a single LXC container within a docker container to g
 * Proper signal handling in both directions (shutting down the docker container properly shuts down the LXC container. Poweroff in LXC shuts down the docker container)
 * LXCFS support: Within the container, uptime and limits are displayed correctly
 * Shell-Wrapper: If /bin/sh is invoked with "docker exec", a shell in the LXC container is spawned. So a console in most management tools opens directly within the LXC container, not in the surrounding docker container
-* Creation of initial root filesystems: for some distributions, a root filesystem can simply be set, using an environment variable
-* Adding of initial SSH key via environment variable
+* Creation of initial root filesystems: for some distributions, an initial root filesystem can simply be set up, using an environment variable
+* Adding of initial SSH key via environment variable to get instant log-in
 
-## Some Use-Cases
+### Some Use-Cases
 
 * Provide "home containers" for your users, each with own ssh access and persistent state
 * Run a linux remote desktop server on kubernetes
