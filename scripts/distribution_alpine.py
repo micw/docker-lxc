@@ -7,9 +7,6 @@ import yaml
 from urllib.request import urlopen
 from lxcutil import *
 
-def run_chroot(dir,cmd):
-    run("arch-chroot %s %s"%(dir,cmd))
-
 def install_to(dir):
 
     arch=os.environ.get("ALPINE_ARCH","x86_64")
@@ -30,7 +27,7 @@ def install_to(dir):
     print("Downloading and extracting %s"%rootfs_url)
     run("curl -s %s | tar xfz - -C %s"%(rootfs_url,dir))
     
-    print("Praparing rootfs")
+    print("Preparing rootfs")
     # copy resolv.conf
     run("cat /etc/resolv.conf > %s/etc/resolv.conf"%dir)
 

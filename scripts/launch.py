@@ -22,15 +22,15 @@ if not os.path.isdir(rootfs):
         if os.path.isdir(rootfs_tmp):
             print("Removing old temporary rootfs")
             shutil.rmtree(rootfs_tmp)
-        # setup
-        os.mkdir(rootfs_tmp)
+       # setup
+        mkdirs(rootfs_tmp)
         distribution_script.install_to(rootfs_tmp)
         os.rename(rootfs_tmp,rootfs)
     else:
         print("Please set DISTRIBUTION or provide your own root filesystem at /data/rootfs")
         quit(1)
 
-if bool(os.environ.get("COPY_RESOLV_CONF","true")):
+if os.environ.get("COPY_RESOLV_CONF","true")=="true":
     print("Copy resolv.conf to machine")
     run("cat /etc/resolv.conf > /data/rootfs/etc/resolv.conf")
 
@@ -39,10 +39,9 @@ if os.environ.get("INITIAL_SSH_KEY",None) is not None and not os.path.exists("/d
     os.makedirs("/data/rootfs/root/.ssh", exist_ok=True)
     writefile("/data/rootfs/root/.ssh","authorized_keys",os.environ.get("INITIAL_SSH_KEY")+"\n")
 
+mkdirs("/var/lib/lxcfs")
 
-run("mkdir -p /var/lib/lxcfs")
-
-if bool(os.environ.get("USE_LXCFS","true")):
+if os.environ.get("USE_LXCFS","false")=="true":
     print("Mounting lxcfs")
     subprocess.Popen(["lxcfs","-s","-o","allow_other","/var/lib/lxcfs"])
     waitcount=0
@@ -53,7 +52,7 @@ if bool(os.environ.get("USE_LXCFS","true")):
             quit(1)
         sleep(1)
 
-run("mkdir -p /data/machine")
+mkdirs("/data/machine")
 run("cp /scripts/lxc-config /data/machine/config")
 
 def shutdown_handler(signum, frame):

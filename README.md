@@ -39,7 +39,7 @@ This project allows to use a single LXC container within a docker container to g
 docker run -d \
   --name lxc \
   --privileged  \
-  --hostname lxctest1
+  --hostname lxctest1 \
   -v /path/to/data:/data \
   -e DISTRIBUTION=alpine \
   -e INITIAL_SSH_KEY="ssh-rsa AAAA...Q== my-initial-ssh-key" \
@@ -54,7 +54,8 @@ docker run -d \
 
 * DISTRIBUTION: triggers a distribution specific setup script if /data/rootfs does not exist (see below)
 * INITIAL_SSH_KEY: if set, it is copied to /root/.ssh/authorized keys on startup if that file does not exist yet
-* USE_LXCFS (default true): if true, mount [LXCFS](https://github.com/lxc/lxcfs) into the LXC container
+* USE_LXCFS (default false): if true, mount [LXCFS](https://github.com/lxc/lxcfs) into the LXC container
+    * :warning: May not work with systemd!
 * COPY_RESOLV_CONF (default true): if true, copy resolv.conf from docker container into the LXC container
 
 ### Available distribution setup scripts
@@ -71,3 +72,14 @@ Supported environment variables:
 * ALPINE_VERSION: (default latest-stable): alpine version to install
 * ALPINE_EXTRA_PACKAGES: additional packages to install along with the rootfs
 
+#### DISTRIBUTION: archlinux
+
+Installs archlinux if rootfs does not exist.
+
+Features:
+* Basic system image with common tools and openssh
+
+Supported environment variables:
+* ARCHLINUX_INSTALL_TRIZEN: (default: true): if true, install the trizen package manager for AUR packages
+* ARCHLINUX_EXTRA_PACKAGES: additional packages to install along with the rootfs. Installation will be run with trizen if installed, otherwise with pacman
+* ARCHLINUX_MIRRORLIST_COUNTRY (default: Germany - I confess, I'm biased): Country to use for create an initial packman mirror list
