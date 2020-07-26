@@ -5,6 +5,8 @@
 
 Docker Hub: [micwy/lxc](https://hub.docker.com/r/micwy/lxc) 
 
+I'm very impressed, how much pulls this image gets. Please let me know how you use this (just create an issue at github), I'll add this to the "Use-Cases" section.
+
 ## Why?
 
 In some cases, it might be usefull to run full-blown operating systems in a docker environment which have "state", primarily meaning to have a persitent root volume. With docker only, this is not possible since docker does not allow / to be a volume. This is where LXC comes into play. LXC provides a process isolation similar to docker but with statefull root filesystems. Unfortunately, with the rise of docker, management tools for docker are much more widespread and sophisticated than those for LXC.
@@ -49,6 +51,67 @@ docker run -d \
 * "privileged" is currently required to run LXC on the container
 * The hostname is passed into the lxc container
 * The volume /data contains the root filesystem (under /data/rootfs) and some additional files (temporary root fs during system creation, lxc config)
+
+### Running on Kubernetes
+
+Here's an example yaml to run this on kubernetes. If there's some interest, I can also provide a helm chart.
+
+```
+---
+# Source: lxc/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mylxcbox
+  labels:
+    app.kubernetes.io/name: lxc
+    app.kubernetes.io/instance: mylxcbox
+spec:
+  replicas: 
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: lxc
+      app.kubernetes.io/instance: mylxcbox
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: lxc
+        app.kubernetes.io/instance: mylxcbox
+    spec:
+      containers:
+        - name: lxc
+          image: "micwy/lxc:latest"
+          imagePullPolicy: Always
+          # Required to launch lxc containers in the docker container
+          securityContext:
+            privileged: true
+          # Required to make LXC console work
+          stdin: true
+          tty: true
+          ports:
+            - name: ssh
+              containerPort: 22
+              protocol: TCP
+              hostPort: 2201
+          env:
+            - name: "DISTRIBUTION"
+              value: "archlinux"
+            - name: "INITIAL_SSH_KEY"
+              value: "ssh-rsa ...DVs= my-ssh-key"
+          volumeMounts:
+            - mountPath: /data
+              name: data
+      # Will be passed into the lxc container
+      hostname: mylxcbox
+      volumes:
+      - name: data
+        hostPath:
+          path: /data/mylxcbox
+  # Strategy must be recreate if hostPort is used
+  strategy:
+    type: Recreate
+
+```
 
 ### Environment variables
 
