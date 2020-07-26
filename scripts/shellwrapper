@@ -4,7 +4,7 @@
 # Otherwise enter the lxc-container and pass the command into it
 
 if [ "$PPID" == "0" -a "$$" != "1" ]; then
-  exec lxc-attach -n machine $0 "$@"
+  exec lxc-attach -n machine -- $0 "$@"
   exit $?
 fi
 
