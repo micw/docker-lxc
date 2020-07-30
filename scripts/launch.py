@@ -36,10 +36,12 @@ if os.environ.get("COPY_RESOLV_CONF","true")=="true":
 
 if os.environ.get("INITIAL_SSH_KEY",None) is not None and not os.path.exists("/data/rootfs/root/.ssh/authorized_keys"):
     print("Adding initial ssh key for root")
-    os.makedirs("/data/rootfs/root/.ssh", exist_ok=True)
+    mkdirs("/data/rootfs/root/.ssh")
     writefile("/data/rootfs/root/.ssh","authorized_keys",os.environ.get("INITIAL_SSH_KEY")+"\n")
 
 mkdirs("/var/lib/lxcfs")
+mkdirs("/vol")
+mkdirs("/data/rootfs/vol")
 
 if os.environ.get("USE_LXCFS","false")=="true":
     print("Mounting lxcfs")

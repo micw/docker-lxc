@@ -8,6 +8,6 @@ RUN \
 
 ADD scripts /scripts
 
-VOLUME /data
+VOLUME /data /vol
 
 CMD ["/usr/bin/python3","/scripts/launch.py"]

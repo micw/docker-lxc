@@ -29,3 +29,5 @@ lxc.net.0.type=none
 
 lxc.rootfs.path=/data/rootfs
 
+# Extra mounts for additional volumes which can be mounted to /vol on docker
+lxc.mount.entry = /vol vol none rbind 0 0

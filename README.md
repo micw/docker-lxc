@@ -43,6 +43,7 @@ docker run -d \
   --privileged  \
   --hostname lxctest1 \
   -v /path/to/data:/data \
+  -v /path/to/somedir:/vol/somedir \
   -e DISTRIBUTION=alpine \
   -e INITIAL_SSH_KEY="ssh-rsa AAAA...Q== my-initial-ssh-key" \
   micwy/lxc
@@ -120,6 +121,11 @@ spec:
 * USE_LXCFS (default false): if true, mount [LXCFS](https://github.com/lxc/lxcfs) into the LXC container
     * :warning: May not work with systemd!
 * COPY_RESOLV_CONF (default true): if true, copy resolv.conf from docker container into the LXC container
+
+### Additional volumes
+
+* the directory /vol of the docker container is mounted with "rbind" into /vol on the LXC container
+* Every docker-volume that is mounted to /vol/something will appear as /vol/something on LXC
 
 ### Available distribution setup scripts
 
