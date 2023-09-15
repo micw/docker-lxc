@@ -1,4 +1,4 @@
-FROM alpine:3.17
+FROM alpine:3.15
 
 RUN \
   apk add --update --no-cache bash curl lxc lxc-templates bridge lxcfs python3 py3-requests py3-yaml arch-install-scripts tar zstd \
