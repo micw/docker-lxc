@@ -34,4 +34,4 @@ lxc.mount.entry = /vol vol none rbind 0 0
 
 lxc.apparmor.allow_incomplete = 1
 
-lxc.aa_allow_incomplete = 1
+# lxc.aa_allow_incomplete = 1
