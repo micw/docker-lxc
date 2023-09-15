@@ -1,7 +1,7 @@
-FROM alpine:latest
+FROM alpine:3.17
 
 RUN \
-  apk add --update --no-cache bash curl lxc lxc-templates lxcfs python3 py3-requests py3-yaml arch-install-scripts tar zstd \
+  apk add --update --no-cache bash curl lxc lxc-templates bridge lxcfs python3 py3-requests py3-yaml arch-install-scripts tar zstd \
   && echo "lxc.lxcpath = /data" > /etc/lxc/lxc.conf \
   && ln -sf /scripts/shellwrapper /bin/sh \
   && echo "PS1='\\h (outer docker container, to enter inner container use: lxc-attach -n machine) \\w # '" > /root/.bashrc
