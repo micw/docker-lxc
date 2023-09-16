@@ -3,7 +3,9 @@
 > :warning: This is a complete rewrite, using LXC only without vagrant. It is able to run LXC containers created with v0.1 but
 > config and usage differs. Use tag v0.1 to get the old version.
 
-Docker Hub: [micwy/lxc](https://hub.docker.com/r/micwy/lxc) 
+I'm leaving docker hub. New images can be found at [ghcr.io/micw/docker-lxc](https://github.com/micw/docker-lxc/pkgs/container/docker-lxc)
+
+Old Docker Hub: [micwy/lxc](https://hub.docker.com/r/micwy/lxc)
 
 I'm very impressed, how much pulls this image gets. Please let me know how you use this (just create an issue at github), I'll add this to the "Use-Cases" section.
 
