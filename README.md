@@ -31,6 +31,7 @@ This project allows to use a single LXC container within a docker container to g
 * Provide "home containers" for your users, each with own ssh access and persistent state
 * Run a linux remote desktop server on kubernetes
 * Easily run statefull software (like froxlor control panel or plesk) on docker/kubernetes
+* Run using other linux flavors - requires systemd - https://linuxcontainers.org/lxc/getting-started/
 
 ### Ideas / Backlog
 

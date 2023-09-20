@@ -31,3 +31,7 @@ lxc.rootfs.path=/data/rootfs
 
 # Extra mounts for additional volumes which can be mounted to /vol on docker
 lxc.mount.entry = /vol vol none rbind 0 0
+
+lxc.apparmor.allow_incomplete = 1
+
+# lxc.aa_allow_incomplete = 1
